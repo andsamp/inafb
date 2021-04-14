@@ -6,54 +6,40 @@ import {
   Heading,
   Grommet,
   Layer,
-  ResponsiveContext,
+  ResponsiveContext, CheckBox,
 } from 'grommet';
-import { FormClose, Notification } from 'grommet-icons';
-import { grommet } from 'grommet/themes';
-
-const AppBar = (props) => (
-  <Box
-    tag="header"
-    direction="row"
-    align="center"
-    justify="between"
-    background="brand"
-    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    elevation="medium"
-    style={{ zIndex: '1' }}
-    {...props}
-  />
-);
+import { FormClose, Menu } from 'grommet-icons';
+import { hpe } from 'grommet-theme-hpe';
+import {HeaderBar} from "./components/header/header";
 
 export const App = () => {
-  const [showSidebar, setShowSidebar] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
+  const [showDarkMode, setShowDarkMode] = useState( false)
   return (
-    <Grommet theme={grommet} full={true} themeMode='dark'>
+    <Grommet theme={hpe} full={true} themeMode={showDarkMode ? 'dark' : 'light'}>
       <ResponsiveContext.Consumer>
         {size => (
           <Box fill={true}>
-            <AppBar>
-              <Heading level='3' margin='none'>I Need a Friggin Budget</Heading>
+            <HeaderBar>
               <Button
-                icon={<Notification />}
-                onClick={() => setShowSidebar(!showSidebar)}
+                icon={<Menu />}
+                onClick={() => setShowMenu(!showMenu)}
               />
-            </AppBar>
+              <Heading level='3' margin='none'>I Need a Friggin Budget</Heading>
+            </HeaderBar>
             <Box direction='row' flex={true} overflow={{ horizontal: 'hidden' }}>
-              <Box flex={true} align='center' justify='center'>
-                app body
-              </Box>
-              {(!showSidebar || size !== 'small') ? (
-                <Collapsible direction="horizontal" open={showSidebar}>
+
+              {(!showMenu || size !== 'small') ? (
+                <Collapsible direction="horizontal" open={showMenu}>
                   <Box
                     flex={true}
                     width='medium'
-                    background='light-2'
+                    background='dark-2'
                     elevation='small'
-                    align='center'
-                    justify='center'
+                    align='left'
+                    justify='top'
                   >
-                    sidebar
+                    <CheckBox checked={showDarkMode} label="dark mode?" onChange={(event) => setShowDarkMode(event.target.checked)} />
                   </Box>
                 </Collapsible>
               ): (
@@ -67,7 +53,7 @@ export const App = () => {
                   >
                     <Button
                       icon={<FormClose />}
-                      onClick={() => setShowSidebar(false)}
+                      onClick={() => setShowMenu(false)}
                     />
                   </Box>
                   <Box
