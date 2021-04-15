@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -28,10 +28,10 @@ const AppBar = (props) => (
 export const App = () => {
   const [showSidebar, setShowSidebar] = useState(false);
   return (
-    <Grommet theme={grommet} full themeMode='dark'>
+    <Grommet theme={grommet} full={true} themeMode='dark'>
       <ResponsiveContext.Consumer>
         {size => (
-          <Box fill>
+          <Box fill={true}>
             <AppBar>
               <Heading level='3' margin='none'>I Need a Friggin Budget</Heading>
               <Button
@@ -39,14 +39,14 @@ export const App = () => {
                 onClick={() => setShowSidebar(!showSidebar)}
               />
             </AppBar>
-            <Box direction='row' flex overflow={{ horizontal: 'hidden' }}>
-              <Box flex align='center' justify='center'>
+            <Box direction='row' flex={true} overflow={{ horizontal: 'hidden' }}>
+              <Box flex={true} align='center' justify='center'>
                 app body
               </Box>
               {(!showSidebar || size !== 'small') ? (
                 <Collapsible direction="horizontal" open={showSidebar}>
                   <Box
-                    flex
+                    flex={true}
                     width='medium'
                     background='light-2'
                     elevation='small'
@@ -71,7 +71,7 @@ export const App = () => {
                     />
                   </Box>
                   <Box
-                    fill
+                    fill={true}
                     background='light-2'
                     align='center'
                     justify='center'

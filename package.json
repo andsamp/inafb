@@ -19,8 +19,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "eslint src",
-    "lint:fix": "eslint --fix src"
+    "lint": "eslint --ext .js --ext .jsx src",
+    "lint:fix": "eslint --ext .js --ext .jsx --fix src"
   },
   "eslintConfig": {
     "extends": [
@@ -42,11 +42,12 @@
   },
   "devDependencies": {
     "eslint": "^7.24.0",
-    "eslint-config-standard": "^16.0.2",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-parallel": "^0.3.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0"
   }

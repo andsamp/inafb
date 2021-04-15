@@ -1,6 +1,6 @@
-const reportWebVitals = (onPerfEntry) => {
+export const reportWebVitals = (onPerfEntry) => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({
+    import('web-vitals').then(({ //eslint-disable-line
       getCLS, getFID, getFCP, getLCP, getTTFB
     }) => {
       getCLS(onPerfEntry)
@@ -11,5 +11,3 @@ const reportWebVitals = (onPerfEntry) => {
     })
   }
 }
-
-export default reportWebVitals
