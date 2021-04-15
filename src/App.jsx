@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Box,
   Button,
@@ -10,11 +10,18 @@ import {
 } from 'grommet';
 import { FormClose, Menu } from 'grommet-icons';
 import { hpe } from 'grommet-theme-hpe';
+import {useDispatch, useSelector} from "react-redux";
 import {HeaderBar} from "./components/header/header";
+import {toggleDarkMode} from "./redux/actions/theme-actions";
+import {darkModeSelector} from "./redux/selectors/theme-selectors";
+import {toggleMenu} from "./redux/actions/menu-actions";
+import {isMenuOpenSelector} from "./redux/selectors/menu-selectors";
 
 export const App = () => {
-  const [showMenu, setShowMenu] = useState(false);
-  const [showDarkMode, setShowDarkMode] = useState( false)
+  const dispatch = useDispatch();
+  const showDarkMode = useSelector(darkModeSelector)
+  const showMenu = useSelector(isMenuOpenSelector)
+
   return (
     <Grommet theme={hpe} full={true} themeMode={showDarkMode ? 'dark' : 'light'}>
       <ResponsiveContext.Consumer>
@@ -23,9 +30,9 @@ export const App = () => {
             <HeaderBar>
               <Button
                 icon={<Menu />}
-                onClick={() => setShowMenu(!showMenu)}
+                onClick={() => dispatch(toggleMenu())}
               />
-              <Heading level='3' margin='none'>I Need a Friggin Budget</Heading>
+              <Heading level='3' margin='none'>{size !== 'small' ? 'I Need a Friggin Budget' : 'inafb' }</Heading>
             </HeaderBar>
             <Box direction='row' flex={true} overflow={{ horizontal: 'hidden' }}>
 
@@ -39,7 +46,7 @@ export const App = () => {
                     align='left'
                     justify='top'
                   >
-                    <CheckBox checked={showDarkMode} label="dark mode?" onChange={(event) => setShowDarkMode(event.target.checked)} />
+                    <CheckBox checked={showDarkMode} label="dark mode?" onChange={() => dispatch(toggleDarkMode())} />
                   </Box>
                 </Collapsible>
               ): (
@@ -53,7 +60,7 @@ export const App = () => {
                   >
                     <Button
                       icon={<FormClose />}
-                      onClick={() => setShowMenu(false)}
+                      onClick={() => dispatch(toggleMenu())}
                     />
                   </Box>
                   <Box
